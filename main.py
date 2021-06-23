@@ -1,6 +1,6 @@
 import pygame
 import random
-
+import sys
 
 pygame.init() #initialize the pygame
 
@@ -65,17 +65,23 @@ def game():
             display.blit(gamerestart, [width / 5, height / 2])
             pygame.display.update()
             for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    gameover = True
+                    gameclose = False
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_1:
                         gameover = True
                         gameclose = False
-                        pygame.quit()
+                        pygame.display.quit()
                         quit()
+                        sys.exit()
                     if event.key == pygame.K_2:
                         game()
         for event in pygame.event.get():
              if event.type == pygame.QUIT:
                  gameover == True
+                 pygame.quit()
+                 sys.exit()
              if event.type == pygame.KEYDOWN:
                  if event.key == pygame.K_LEFT:
                      x_speed = - snake_size
@@ -125,6 +131,7 @@ def game():
     #quitting if we exit loop
     pygame.quit()
     quit
+    sys.exit()
 
 
 game()
